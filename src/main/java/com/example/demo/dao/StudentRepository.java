@@ -1,15 +1,12 @@
 package com.example.demo.dao;
-
-import java.util.List;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.entity.Student;
+@Repository
+@Transactional
+public interface StudentRepository extends CrudRepository<Student, Integer> {
 
-public interface StudentRepository {
-	
-	List<Student> getStudents();
-	Student getStudent(int studentId);
-	Student createStudent(Student student);
-	Student updateStudent(int studentID,Student student);
-	boolean deleteStudent(int id);
 	
 }

@@ -1,43 +1,42 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dao.StudentRepository;
 import com.example.demo.entity.Student;
 @Service
-@org.springframework.transaction.annotation.Transactional
-public class StudentServiceImpl implements StudentService {
+@Transactional
+public class StudentServiceImpl {
 	@Autowired
 	private StudentRepository repository;
 	
-	@Override
-	public List<Student> getStudents() {
-		return repository.getStudents();
+	public List<Student> getAllStudents() {
+	    List<Student> students = new ArrayList<>();
+	    repository.findAll()
+	    .forEach(students::add);
+	    return students;		
 	}
-
-	@Override
-	public Student getStudent(int studentId) {
-		return repository.getStudent(studentId);
-	}
-
-	@Override
-	public Student createStudent(Student student) {
-		return repository.createStudent(student);
-	}
-
-	@Override
-	public Student updateStudent(int studentID, Student student) {
-		return repository.updateStudent(studentID, student);
-	}
-
-	@Override
-	public boolean deleteStudent(int id) {
-		return repository.deleteStudent(id);
-	}
-
 	
+	public void addStudent(Student student) {
+		repository.save(student);
+	}
+	
+	public Student getStudent(int id) {
+		Student student  =  repository.findOne(id);
+		return student;
+		
+	}
+	public void updateStudent(int id, Student student) {
+		repository.save(student);
+	}
+
+	public void deleteStudent(int id) {
+		repository.delete(id);
+	}
+
 
 }
