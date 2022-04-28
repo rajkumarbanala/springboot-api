@@ -11,6 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="student")
+
 public class Student implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -28,6 +29,12 @@ public class Student implements Serializable {
 	private String email;
 	@Column(name="mobile")
 	private String mobile;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getFirstName() {
 		return firstName;
 	}
@@ -64,4 +71,6 @@ public class Student implements Serializable {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
+
+	
 }

@@ -7,36 +7,53 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dao.StudentRepository;
+import com.example.demo.dto.StudentCreateRequestDTO;
+import com.example.demo.dto.StudentCreateResponseDTO;
 import com.example.demo.entity.Student;
+import com.example.demo.mapper.StudentMapper;
 @Service
 @Transactional
-public class StudentServiceImpl {
+public class StudentServiceImpl implements StudentServceI {
 	@Autowired
 	private StudentRepository repository;
+	@Autowired
+	private StudentMapper mapper;
 	
+	@Override
 	public List<Student> getAllStudents() {
-	    List<Student> students = new ArrayList<>();
+		List<Student> students = new ArrayList<>();
 	    repository.findAll()
 	    .forEach(students::add);
-	    return students;		
+	    return students;
 	}
-	
-	public void addStudent(Student student) {
-		repository.save(student);
-	}
-	
-	public Student getStudent(int id) {
-		Student student  =  repository.findOne(id);
-		return student;
-		
-	}
-	public void updateStudent(int id, Student student) {
-		repository.save(student);
+	@Override
+	public StudentCreateResponseDTO addStudent(StudentCreateRequestDTO studentCreateRequestDTO) {
+		Student student = mapper.toEntity(studentCreateRequestDTO);
+		student = repository.save(student);
+		return mapper.toCreateResponseDTO(student);
 	}
 
+	@Override
+	public StudentCreateResponseDTO getStudent(int id) {
+		Student student = repository.findOne(id);
+		return mapper.toCreateResponseDTO(student); 
+	}
+
+	@Override
+	public StudentCreateResponseDTO updateStudent(StudentCreateRequestDTO studentCreateRequestDTO) {
+		Student student = mapper.toEntity(studentCreateRequestDTO);
+		student=repository.save(student);
+		return mapper.toCreateResponseDTO(student);
+	}
+
+	@Override
 	public void deleteStudent(int id) {
 		repository.delete(id);
 	}
 
-
+	public StudentCreateResponseDTO create(StudentCreateRequestDTO studentCreateRequestDTO) {
+		Student student = mapper.toEntity(studentCreateRequestDTO);
+		student = repository.save(student);
+		return mapper.toCreateResponseDTO(student);
+}
 }
