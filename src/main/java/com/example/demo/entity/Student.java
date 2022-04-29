@@ -28,7 +28,7 @@ public class Student implements Serializable {
 	@Column(name="email")
 	private String email;
 	@Column(name="mobile")
-	private String mobile;
+	private double mobile;
 	public int getId() {
 		return id;
 	}
@@ -65,10 +65,10 @@ public class Student implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getMobile() {
+	public double getMobile() {
 		return mobile;
 	}
-	public void setMobile(String mobile) {
+	public void setMobile(double mobile) {
 		this.mobile = mobile;
 	}
 

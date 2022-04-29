@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.dto.StudentCreateRequestDTO;
 import com.example.demo.dto.StudentCreateResponseDTO;
 import com.example.demo.entity.Student;
-
+import com.example.demo.mapper.StudentMapper;
 import com.example.demo.service.StudentServiceImpl;
 
 @RestController
@@ -26,9 +26,9 @@ public class StudentController {
 
 	@Autowired
 	private StudentServiceImpl service;
-
+	
 	@GetMapping
-	public List<Student> getStudents() {
+	public List<StudentCreateResponseDTO> getStudents() {
 		return service.getAllStudents();	 
 	}
 
@@ -38,14 +38,14 @@ public class StudentController {
 	}
 	
 	@PostMapping
-	public StudentCreateResponseDTO createStudent(@RequestBody  StudentCreateRequestDTO StudentCreateRequestDTO) {
-		 return service.addStudent(StudentCreateRequestDTO);
+	public StudentCreateResponseDTO createStudent(@RequestBody  StudentCreateRequestDTO createRequestDTO) {
+		System.out.println(createRequestDTO.getFirstName()+"..............");
+		 return service.addStudent(createRequestDTO);
 	}
 
 	@PutMapping
-	public StudentCreateResponseDTO updateStudent(@RequestBody StudentCreateRequestDTO StudentCreateRequestDTO) {
-
-		return service.updateStudent(StudentCreateRequestDTO);
+	public StudentCreateResponseDTO updateStudent(@RequestBody StudentCreateRequestDTO createRequestDTO) {
+		return service.updateStudent(createRequestDTO);
 		 
 	}
 

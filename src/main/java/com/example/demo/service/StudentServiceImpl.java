@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,14 +19,7 @@ public class StudentServiceImpl implements StudentServceI {
 	private StudentRepository repository;
 	@Autowired
 	private StudentMapper mapper;
-	
-	@Override
-	public List<Student> getAllStudents() {
-		List<Student> students = new ArrayList<>();
-	    repository.findAll()
-	    .forEach(students::add);
-	    return students;
-	}
+
 	@Override
 	public StudentCreateResponseDTO addStudent(StudentCreateRequestDTO studentCreateRequestDTO) {
 		Student student = mapper.toEntity(studentCreateRequestDTO);
@@ -42,7 +36,7 @@ public class StudentServiceImpl implements StudentServceI {
 	@Override
 	public StudentCreateResponseDTO updateStudent(StudentCreateRequestDTO studentCreateRequestDTO) {
 		Student student = mapper.toEntity(studentCreateRequestDTO);
-		student=repository.save(student);
+		student = repository.save(student);
 		return mapper.toCreateResponseDTO(student);
 	}
 
@@ -50,10 +44,15 @@ public class StudentServiceImpl implements StudentServceI {
 	public void deleteStudent(int id) {
 		repository.delete(id);
 	}
-
-	public StudentCreateResponseDTO create(StudentCreateRequestDTO studentCreateRequestDTO) {
-		Student student = mapper.toEntity(studentCreateRequestDTO);
-		student = repository.save(student);
-		return mapper.toCreateResponseDTO(student);
-}
+	@Override
+	public List<StudentCreateResponseDTO> getAllStudents() {
+		List<Student> students = new ArrayList<>();
+		 repository.findAll().forEach(students::add);
+		 List<StudentCreateResponseDTO> dtos = new ArrayList<>();
+		 for (Iterator iterator = students.iterator(); iterator.hasNext();) {
+			Student s = (Student) iterator.next();
+			dtos.add(mapper.toCreateResponseDTO(s));	
+		}
+		return dtos;
+	}
 }
