@@ -39,7 +39,6 @@ public class StudentController {
 	
 	@PostMapping
 	public StudentCreateResponseDTO createStudent(@RequestBody  StudentCreateRequestDTO createRequestDTO) {
-		System.out.println(createRequestDTO.getFirstName()+"..............");
 		 return service.addStudent(createRequestDTO);
 	}
 
