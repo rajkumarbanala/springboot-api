@@ -48,11 +48,11 @@ public class StudentController {
 		return service.addStudent(createRequestDTO);
 	}
 
-	@PutMapping
-	public StudentCreateResponseDTO updateStudent(@RequestBody StudentCreateRequestDTO createRequestDTO) {
+	@PutMapping("/{id}")
+	public StudentCreateResponseDTO updateStudent(@RequestBody StudentCreateRequestDTO createRequestDTO,@PathVariable int id) {
 		LOG.debug("updateStudent()");
 		
-		return service.updateStudent(createRequestDTO);
+		return service.updateStudent(createRequestDTO,id);
 
 	}
 

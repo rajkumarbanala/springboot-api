@@ -13,9 +13,6 @@ public class StudentCreateRequestDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@JsonProperty("id")
-	private int id;
-
 	@JsonProperty("firstName")
 	private String firstName;
 	

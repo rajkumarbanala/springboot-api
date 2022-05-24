@@ -10,7 +10,6 @@ public class StudentMapperImpl implements StudentMapper {
 	@Override
 	public Student toEntity(StudentCreateRequestDTO studentCreateRequestDTO) {
 		Student s= new Student();
-		s.setId(studentCreateRequestDTO.getId());
 		s.setFirstName(studentCreateRequestDTO.getFirstName());
 		s.setLastName(studentCreateRequestDTO.getLastName());
 		s.setUserName(studentCreateRequestDTO.getUserName());

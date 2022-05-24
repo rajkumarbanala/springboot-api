@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,13 +56,22 @@ public class StudentServiceImpl implements StudentServce {
 
 	@Override
 	@Transactional(readOnly = false)
-	public StudentCreateResponseDTO updateStudent(StudentCreateRequestDTO studentCreateRequestDTO) {
+	public StudentCreateResponseDTO updateStudent(StudentCreateRequestDTO createRequestDTO, int id) {
 		LOG.debug("updateStudent()");
-		
-		Student student = studentMapper.toEntity(studentCreateRequestDTO);
-		
-		student = studentRepository.save(student);
-		
+
+		Student student = studentMapper.toEntity(createRequestDTO);
+		Optional<Student> studentOptional = studentRepository.findById(id);
+		if (studentOptional.isPresent()) {
+			studentOptional.get().setFirstName(student.getFirstName());
+			studentOptional.get().setLastName(student.getLastName());
+			studentOptional.get().setUserName(student.getUserName());
+			studentOptional.get().setPassword(student.getPassword());
+			studentOptional.get().setMobile(student.getMobile());
+			studentOptional.get().setEmail(student.getEmail());
+
+			student = studentRepository.save(studentOptional.get());
+			
+		}
 		return studentMapper.toCreateResponseDTO(student);
 	}
 
@@ -76,7 +86,7 @@ public class StudentServiceImpl implements StudentServce {
 			studentRepository.delete(studentOptional.get());
 			return true;
 		} else
-			throw new RuntimeException("Stundent not found");
+			throw new RuntimeException("Student not found");
 	}
 
 	@Override
@@ -84,16 +94,12 @@ public class StudentServiceImpl implements StudentServce {
 		LOG.debug("getAllStudents()");
 		
 		List<Student> students = new ArrayList<>();
-		
-		studentRepository.findAll().forEach(students::add);
-		
 		List<StudentCreateResponseDTO> dtos = new ArrayList<>();
-		
-		for (Iterator iterator = students.iterator(); iterator.hasNext();) {
-			Student s = (Student) iterator.next();
-			dtos.add(studentMapper.toCreateResponseDTO(s));
-		}
-		
+		studentRepository.findAll().forEach(students::add);
+		students.stream().forEach(k -> {
+			dtos.add(studentMapper.toCreateResponseDTO(k));
+		});
+
 		return dtos;
 	}
 }

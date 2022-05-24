@@ -13,7 +13,7 @@ public interface StudentServce {
 
 	public StudentCreateResponseDTO getStudent(int id);
 
-	public StudentCreateResponseDTO updateStudent(StudentCreateRequestDTO studentCreateRequestDTO);
+	public StudentCreateResponseDTO updateStudent(StudentCreateRequestDTO studentCreateRequestDTO,int id);
 
 	public boolean deleteStudent(int id);
 
