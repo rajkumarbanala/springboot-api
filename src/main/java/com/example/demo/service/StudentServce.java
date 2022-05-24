@@ -4,16 +4,19 @@ import java.util.List;
 
 import com.example.demo.dto.StudentCreateRequestDTO;
 import com.example.demo.dto.StudentCreateResponseDTO;
+import com.example.demo.dto.StudentGetResponseDTO;
+import com.example.demo.dto.StudentListResponseDTO;
+import com.example.demo.dto.StudentUpdateResponseDTO;
 
 public interface StudentServce {
 
-	public List<StudentCreateResponseDTO> getAllStudents();
+	public List<StudentListResponseDTO> getAllStudents();
 
 	public StudentCreateResponseDTO addStudent(StudentCreateRequestDTO studentCreateRequestDTO);
 
-	public StudentCreateResponseDTO getStudent(int id);
+	public StudentGetResponseDTO getStudent(int id);
 
-	public StudentCreateResponseDTO updateStudent(StudentCreateRequestDTO studentCreateRequestDTO,int id);
+	public StudentUpdateResponseDTO updateStudent(StudentCreateRequestDTO studentCreateRequestDTO,int id);
 
 	public boolean deleteStudent(int id);
 

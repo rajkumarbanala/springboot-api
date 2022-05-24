@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class StudentCreateResponseDTO implements Serializable {
+public class StudentGetResponseDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

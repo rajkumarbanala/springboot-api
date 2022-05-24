@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.StudentCreateRequestDTO;
 import com.example.demo.dto.StudentCreateResponseDTO;
+import com.example.demo.dto.StudentGetResponseDTO;
+import com.example.demo.dto.StudentListResponseDTO;
+import com.example.demo.dto.StudentUpdateResponseDTO;
 import com.example.demo.service.StudentServiceImpl;
 
 @RestController
@@ -28,14 +31,14 @@ public class StudentController {
 	private StudentServiceImpl service;
 
 	@GetMapping
-	public List<StudentCreateResponseDTO> getStudents() {
+	public List<StudentListResponseDTO> getStudents() {
 		LOG.debug("getStudents()");
 
 		return service.getAllStudents();
 	}
 
 	@GetMapping("/{id}")
-	public StudentCreateResponseDTO getStudent(@PathVariable int id) {
+	public StudentGetResponseDTO getStudent(@PathVariable int id) {
 		LOG.debug("getStudent()");
 
 		return service.getStudent(id);
@@ -49,7 +52,7 @@ public class StudentController {
 	}
 
 	@PutMapping("/{id}")
-	public StudentCreateResponseDTO updateStudent(@RequestBody StudentCreateRequestDTO createRequestDTO,@PathVariable int id) {
+	public StudentUpdateResponseDTO updateStudent(@RequestBody StudentCreateRequestDTO createRequestDTO,@PathVariable int id) {
 		LOG.debug("updateStudent()");
 		
 		return service.updateStudent(createRequestDTO,id);
