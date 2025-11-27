@@ -1,9 +1,9 @@
 package com.example.demo.service;
 
-import java.util.List;
-
 import com.example.demo.dto.StudentCreateRequestDTO;
 import com.example.demo.dto.StudentCreateResponseDTO;
+
+import java.util.List;
 
 public interface StudentServce {
 

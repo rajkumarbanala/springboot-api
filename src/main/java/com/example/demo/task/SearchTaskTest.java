@@ -1,7 +1,5 @@
 package com.example.demo.task;
 
-import java.util.Arrays;
-
 public class SearchTaskTest {
 
     public static void main(String[] args) {

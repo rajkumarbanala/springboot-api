@@ -1,7 +1,9 @@
 package com.example.demo.task;
 
-import java.util.*;
-import java.util.function.Predicate;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class StringTest {
@@ -14,7 +16,7 @@ public class StringTest {
                 .filter(c -> Character.isAlphabetic(c)).collect(Collectors.groupingBy(c -> c, Collectors.counting()));
         System.out.println("charsCountMap:" + charsCountMap);
 
-        // output: a1b3c2
+        // output: a1b3c1
         String charsCount = "";
         for (Map.Entry<Character, Long> e : charsCountMap.entrySet()) {
             charsCount += e.getKey() + "" + e.getValue();

@@ -1,9 +1,9 @@
 package com.example.demo.mapper;
 
-import org.springframework.stereotype.Component;
 import com.example.demo.dto.StudentCreateRequestDTO;
 import com.example.demo.dto.StudentCreateResponseDTO;
 import com.example.demo.entity.Student;
+import org.springframework.stereotype.Component;
 @Component
 public class StudentMapperImpl implements StudentMapper {
 

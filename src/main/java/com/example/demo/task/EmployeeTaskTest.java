@@ -5,8 +5,6 @@ import com.example.demo.Employee;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static java.util.Map.Entry.comparingByKey;
-
 public class EmployeeTaskTest {
     public static void main(String[] args) {
         List<Employee> employees = new ArrayList<>();
