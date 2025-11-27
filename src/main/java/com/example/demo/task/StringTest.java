@@ -6,14 +6,19 @@ import java.util.stream.Collectors;
 
 public class StringTest {
     public static void main(String[] args) {
-        String paragraph = "abcbb123410";
+        String input = "abcbb123410";
 
-        // output: chars: 3, no: 4
+        // output: a:1, b:3, c:1
         Map<Character, Long> charsCountMap = new HashMap<>();
+        charsCountMap = input.chars().mapToObj(c -> (char) c)
+                .filter(c -> Character.isAlphabetic(c)).collect(Collectors.groupingBy(c -> c, Collectors.counting()));
         System.out.println("charsCountMap:" + charsCountMap);
 
         // output: a1b3c2
         String charsCount = "";
+        for (Map.Entry<Character, Long> e : charsCountMap.entrySet()) {
+            charsCount += e.getKey() + "" + e.getValue();
+        }
         System.out.println("charsCount:" + charsCount);
 
         // output: true: 5, flase: 6
@@ -31,7 +36,7 @@ public class StringTest {
             System.out.println("not anagram");
         }
 
-        String input = "ababab";
+        input = "ababab";
         // output: abab
         // prefix:[a, ab, aba, ababa, abab]
         // suffix:[ab, b, bab, babab, abab]
@@ -64,5 +69,20 @@ public class StringTest {
             }
         }
         System.out.println("maxElement:" + maxElement);
+
+        // Palindrome check
+        input = "madam";
+
+        // Anagram check Input: "listen", "silent"
+        input1 = "listen";
+        input2 = "silent";
+
+        // First non-repeating Input: "swiss", output: w
+        input = "swiss";
+
+        // reverse word: apple ball cat to cat ball apple
+        input = "apple ball cat";
+
+
     }
 }

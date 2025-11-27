@@ -21,5 +21,22 @@ public class IntegerTaskTest {
         // output: [1, 3, 12, 0, 0]
         v = new int[]{0, 1, 0, 3, 12};
 
+        // 2nd larget no
+        v = new int[]{0, 1, 0, 3, 12};
+
+        // remove duplicates
+        v = new int[]{1, 1, 2, 2, 3, 4, 4};
+
+        // Two-sum pair input: arr=[1,5,7,-1, 5], target=6 Output: (1,5), (7,-1), should not display duplicate pairs like (1,5), (1, 5)
+        v = new int[]{1, 5, 7, -1, 5};
+        int target = 6;
+
+        // Merge two sorted arrays
+        int[] v1 = {1, 3, 5};
+        int[] v2 = {2, 4, 6};
+        // output: [1,2,3,4,5,6]
+
+
+
     }
 }

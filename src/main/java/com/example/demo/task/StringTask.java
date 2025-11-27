@@ -89,15 +89,15 @@ public class StringTask {
         // String maxLengthString = ?
         Set<String> prefix = new HashSet<>();
         Set<String> suffix = new HashSet<>();
-        int i = 1;
-        int j = input.length() - 1;
+        int iIndex = 1;
+        int jIndex = input.length() - 1;
         for (int k = 1; k < input.length(); k++) {
-            String pr = input.substring(0, i);
-            String sf = input.substring(j, input.length());
+            String pr = input.substring(0, iIndex);
+            String sf = input.substring(jIndex, input.length());
             prefix.add(pr);
             suffix.add(sf);
-            i++;
-            j--;
+            iIndex++;
+            jIndex--;
         }
         System.out.println("prefix:" + prefix);
         System.out.println("suffix:" + suffix);
@@ -114,6 +114,76 @@ public class StringTask {
             }
         }
         System.out.println("maxElement:" + maxElement);
+
+        // Palindrome check
+        input = "madam";
+
+        // using two pointer concept
+        boolean isPalindrom = true;
+        int left = 0;
+        int right = input.length() - 1;
+        while (left < right) {
+            if (input.charAt(left) != input.charAt(right)) {
+                isPalindrom = false;
+                break;
+            }
+            left++;
+            right--;
+        }
+        if (isPalindrom) {
+            System.out.println("palindrom:" + input);
+        } else {
+            System.out.println("not palindrom:" + input);
+        }
+
+        // or using StringBuilder
+        int mid = input.length() / 2;
+        String leftWord = input.substring(0, mid);
+        String rightWord = new StringBuffer(input.substring(mid + 1, input.length())).reverse().toString();
+        if (leftWord.equals(rightWord)) {
+            System.out.println("palindrom:" + input);
+        } else {
+            System.out.println("not palindrom:" + input);
+        }
+
+        // Anagram check Input: "listen", "silent"
+        input1 = "listen";
+        input2 = "silent";
+        char[] ch1 = input1.toCharArray();
+        char[] ch2 = input2.toCharArray();
+        Arrays.sort(ch1);
+        Arrays.sort(ch2);
+        if (input1.length() == input2.length() && Arrays.equals(ch1, ch2)) {
+            System.out.println("anagram: " + input1 + " : " + input2);
+        } else {
+            System.out.println("not anagram: " + input1 + " : " + input2);
+        }
+
+        // First non-repeating Input: "swiss", output: w
+        input = "swiss";
+        int[] output = new int[256];
+        Character nonRepChar = null;
+
+        for (char ch : input.toCharArray()) {
+            output[ch]++;
+        }
+        for (char ch : input.toCharArray()) {
+            if (output[ch] == 1) {
+                nonRepChar = ch;
+                break;
+            }
+        }
+        System.out.println("non repeating char:" + nonRepChar);
+
+        // reverse word: apple ball cat to cat ball apple
+        input = "apple ball cat";
+        String[] words = input.split(" ");
+        StringBuffer sb = new StringBuffer();
+        for (int i = words.length - 1; i >= 0; i--) {
+            sb.append(words[i]);
+            sb.append(" ");
+        }
+        System.out.println("reverse word: " + sb.toString());
 
 
     }
